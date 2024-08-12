@@ -8,57 +8,106 @@ const perguntas = [
     {
         enunciado: "Vitória chegou em casa após o trabalho e recebeu uma notícia de que a região em que mora tem grandes riscos de enchentes. Qual foi o pensamento de Vitória? ",
         alternativas: [
-            "Meu Deus, alguém me tire daqui! ",
-            "Que nada a ver, não vai acontecer nada, É MENTIRAAA!"
+            {
+                texto:  "Meu Deus, alguém me tire daqui! ",
+                afirmacao: "Ficou com medo do que poderia acontecer."
+            },
+            {
+                texto: "Que nada a ver, não vai acontecer nada, É MENTIRAAA!",
+                afirmacao: "Não deu atenção para a notícia e continuou sem se preocupar."
+            }
         ]
     },
     {
         enunciado: "Enquanto dormia, sua mãe foi ao seu quarto avisando que a rua estava quase completamente alagada, e que elas deveriam arrumar imediatamente suas coisas. O que ela levou? ",
         alternativas: [
-            "Coisas essenciais (roupas, calçados, coisas de higiene)",
-            "Joias, maquiagem, muitos livros, câmera fotográfica."
+            {
+                texto: "Coisas essenciais (roupas, calçados, coisas de higiene)",
+                afirmacao: "Pensou e pegou as coisas que são mais necessárias."
+            },
+            {
+                texto:  "Joias, maquiagem, muitos livros, câmera fotográfica.",
+                afirmacao: "Pensou e pegou coisas que não seriam realmente necessárias."
+            }
         ]
     },
     {
         enunciado: "Depois de pegar suas coisas logo um bombeiro em um barco apareceu para resgata-las, porém Vitória possui 2 gatos e 1 cachorro, e o bombeiro não aceita animais no barco. Vitoria foi sem os animais, ou obrigou o bombeiro a levá-los  ?",
         alternativas: [
-            "Foi sem os animais. ",
-            "Obrigou o bombeiro a levá-los."
+            {
+                texto: "Foi sem os animais. ",
+                afirmacao: "Aceitou e chorou horrores, pois amava muito eles."
+            },
+            {
+                texto:   "Obrigou o bombeiro a levá-los.",
+                afirmacao: "Ficou contente que levou seus companheiros de vida."
+            }   
         ]
     },
     {
         enunciado: "Vitória foi resgatada e levada a um abrigo em outra cidade, onde passou 3 semanas. A vida dela continuou normal ou mudou totalmente?",
         alternativas: [
-            "A vida continuou normalmente como era antes.",
-            "A vida delas mudou completamente, virou de cabeça para a baixo."
+            {
+                texto:  "A vida continuou normalmente como era antes.",
+                afirmacao: "Vitória continuou vivendo sua rotina normalmente com as doações, só que no abrigo e sem sair."
+            },
+            {
+                texto: "A vida delas mudou completamente, virou de cabeça para a baixo.",
+                afirmacao: "Vitória ficou totalmente traumatizada sem conseguir retomar seus hábitos."
+            }  
         ]
     },
     {
         enunciado: "Pergunta 5",
         alternativas: [
-            "Alternativa 1",
-            "Alternativa 2"
+            {
+                texto:  "excluir.",
+                afirmacao: "afirmacao"
+            },
+            {
+                texto: "excluir.",
+                afirmacao: "afirmacao"
+            }
         ]
     },
 ];
 
+
 let atual = 0;
 let perguntaAtual;
+let historiaFinal = "";
 
 function mostraPergunta() {
+    if (atual >= perguntas.length){
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas[atual]
     caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
     mostraAlternativas();
 }
 
 function mostraAlternativas(){
     for(const alternativa of perguntaAtual.alternativas){
         const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativa;
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa))
         caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
 
+function respostaSelecionada(opcaoSelecionada) {  
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
+    atual++;
+    mostraPergunta();
+}
+
+function mostraResultado() {
+     caixaPerguntas.textContent = "Em 2049...";
+     textoResultado.textContent = historiaFinal;
+     caixaAlternativas.textContent = "";
+}
+
 mostraPergunta();
-
-
