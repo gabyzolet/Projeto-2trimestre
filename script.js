@@ -57,19 +57,6 @@ const perguntas = [
             }  
         ]
     },
-    {
-        enunciado: "Pergunta 5",
-        alternativas: [
-            {
-                texto:  "excluir.",
-                afirmacao: "afirmacao"
-            },
-            {
-                texto: "excluir.",
-                afirmacao: "afirmacao"
-            }
-        ]
-    },
 ];
 
 
@@ -98,8 +85,7 @@ function mostraAlternativas(){
 }
 
 function respostaSelecionada(opcaoSelecionada) {  
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
+    historiaFinal;
     atual++;
     mostraPergunta();
 }
@@ -107,7 +93,7 @@ function respostaSelecionada(opcaoSelecionada) {
 function mostraResultado() {
      caixaPerguntas.textContent = "Em 2049...";
      textoResultado.textContent = historiaFinal;
-     caixaAlternativas.textContent = "";
+     caixaAlternativas.textContent = "Vitória já estava totalmente recuperada como os outros sobreviventes. O rio grande do sul esteve em reformas para previnir as enchentes e com isso todas as cidades foram recuperadas e os riscos de morte e entre outros acabaram diminuindo.";
 }
 
 mostraPergunta();
